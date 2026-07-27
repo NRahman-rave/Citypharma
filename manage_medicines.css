@@ -1,0 +1,147 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body */
+body {
+    background: #f0f4f8; /* light blueish background */
+    padding: 20px;
+    color: #333;
+}
+
+/* Page titles */
+h2 {
+    color: #1a73e8; /* pharmacy-blue */
+    margin-bottom: 20px;
+}
+
+/* Forms */
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    max-width: 500px;
+    margin-bottom: 40px;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="date"],
+form input[type="submit"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+form input[type="submit"] {
+    background: #1a73e8;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+    background: #155ab6;
+}
+
+/* Links */
+a {
+    color: #1a73e8; 
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+table th, table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background: #1a73e8;
+    color: #fff;
+    font-weight: 500;
+}
+
+table tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+table tr:hover {
+    background: #e6f0ff;
+    transition: 0.3s;
+}
+
+/* Buttons for action links inside tables */
+table a {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+table a:hover {
+    background: #e0e0e0;
+}
+
+/* Alerts for messages */
+.alert {
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.alert-error {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.card {
+    display: inline-block;
+    width: 220px;
+    margin: 10px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    font-size: 18px;
+    text-align: center;
+    color: #333;
+}
+
+.low-stock {
+    background: #fff3cd; /* yellow alert */
+    color: #856404;
+}
+
+.expired {
+    background: #f8d7da; /* red alert */
+    color: #721c24;
+}
