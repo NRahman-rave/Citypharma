@@ -1,44 +1,65 @@
 <?php
+
 session_start();
 require_once 'config.php';
 
 if (isset($_POST['login'])) {
 
-$email = $_POST['email'];
-$password = $_POST['password'];
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
 
-$stmt = $conn->prepare("SELECT * FROM users WHERE email=?");
-$stmt->bind_param("s", $email);
-$stmt->execute();
-$result = $stmt->get_result();
+    if ($email !== '' && $password !== '') {
 
-if ($result->num_rows > 0) {
+        // Find the user securely.
+        $stmt = $conn->prepare(
+            "SELECT id, name, email, password, role
+             FROM users
+             WHERE email = ?
+             LIMIT 1"
+        );
 
-$user = $result->fetch_assoc();
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
 
-if ($password == $user['password']) {
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
 
-$_SESSION['user_id'] = $user['id'];   
-$_SESSION['name'] = $user['name'];
-$_SESSION['email'] = $user['email'];
-$_SESSION['role'] = $user['role'];
+        $stmt->close();
 
-if ($user['role'] === 'manager') {
-header("Location: manager_dashboard.php");
-} else {
-header("Location: staff_dashboard.php");
-}
+        // Verify the submitted password against its stored hash.
+        if ($user && password_verify($password, $user['password'])) {
 
-exit();
+            // Prevent session fixation attacks.
+            session_regenerate_id(true);
 
-}
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['name'] = $user['name'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['role'] = $user['role'];
 
-}
+            // Redirect users according to their roles.
+            if ($user['role'] === 'manager') {
 
-$_SESSION['login_error'] = "Incorrect email or password";
-$_SESSION['active_form'] = "login";
-header("Location: login.php");
-exit();
+                header("Location: manager_dashboard.php");
+                exit();
 
+            } elseif ($user['role'] === 'staff') {
+
+                header("Location: staff_dashboard.php");
+                exit();
+            }
+
+            // Reject accounts with unrecognised roles.
+            $_SESSION = [];
+            session_destroy();
+        }
+    }
+
+    // Generic error prevents revealing whether an email exists.
+    $_SESSION['login_error'] = "Incorrect email or password";
+    $_SESSION['active_form'] = "login";
+
+    header("Location: login.php");
+    exit();
 }
 ?>
