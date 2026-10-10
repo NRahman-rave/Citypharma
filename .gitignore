@@ -1,0 +1,16 @@
+# Citypharma - Git ignore rules
+
+# Private database credentials
+config.local.php
+.env
+.env.local
+
+# Password reset scripts
+reset_passwords_cli.php
+
+# Database backups
+/backups/
+*backup*.sql
+
+# Log files
+*.log
