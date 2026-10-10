@@ -29,7 +29,7 @@ function isActiveForm($formName, $activeForm) {
     <div class="container">
         <div class="form-box <?= isActiveForm('login', $activeForm); ?>" id="login-form">
             <form action="login_config.php" method="post">
-                <h2>Medico</h2>
+                <h2>CityPharma</h2>
                 <?= showError($error); ?>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
