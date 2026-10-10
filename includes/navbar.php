@@ -1,11 +1,13 @@
-<?php session_start(); ?>
+<?php if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}?>
 
 <nav class="navbar navbar-expand-lg shadow-sm">
     <div class="container-fluid px-4">
 
         <!-- Logo -->
         <a class="navbar-brand fw-bold d-flex align-items-center" href="manager_dashboard.php">
-             <span class="ms-2">Medico</span>
+             <span class="ms-2">CityPharma</span>
         </a>
 
         <!-- Mobile toggle -->
